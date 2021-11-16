@@ -19,3 +19,9 @@ It'll keep checking if any slots are open in the interval you mentioned.
 
 As soon as it finds an open slot, it'll send you a notification and the script will close.
 ![Step 5](https://i.ibb.co/h9X6Hd1/Screenshot-2021-11-15-at-6-19-42-PM.png)
+
+## I am scared to enter my UCLA credentials
+Your password is safe and is not sent anywhere - You can check the code yourself.   
+With that said, if you still are skeptical about it, you can also use the public course listings link instead - in case of which you don't need to give your credentials.
+You can browse for courses from [here](https://sa.ucla.edu/ro/public/soc) and get the link in a similar way as was mentioned above.
+The only downside being that the public site updates the slot openings every hour or more, while the one that we see after logging in is real time.
