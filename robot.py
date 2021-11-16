@@ -1,6 +1,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 import time
 import os
 import getpass
@@ -12,7 +13,7 @@ def checker(link, user, pwd, recheck):
 	chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
-	browser = webdriver.Chrome(options=chrome_options) # remove the argument if you wanna see the actual browser
+	browser = webdriver.Chrome()#options=chrome_options) # remove the argument if you wanna see the actual browser
 	browser.get(link) # loads the link
 
 	time.sleep(5) # let the browser land on the login page if needed
@@ -27,14 +28,38 @@ def checker(link, user, pwd, recheck):
 		
 		print("Logging in...",end='\r')
 
-		time.sleep(5) # let the login go through
+		# let the login go through
+		time.sleep(5)
 
-		if "Class Detail" in browser.title:
-			print("Logged in! Checking course status now...")
-		else:
-			print("Wrong credentials or wrong link. Check github page for directions. Exiting...")
-			return
-	
+		for i in range(15): # wait for 15 seconds for login success
+			if "Class Detail" in browser.title:
+				# login success
+				print("Logged in! Checking course status now...")
+				break
+			elif ("Passwords are at least" in browser.page_source) | ("password were incorrect" in browser.page_source):
+				# login failed
+				print("Wrong credentials. Exiting...")
+				return
+			else:
+				# waiting at DUO page, switch to DUO iframe
+				browser.switch_to.frame(browser.find_element("id","duo_iframe"))
+				if "Pushed a login" in browser.page_source:
+					# already pushed login
+					print("Check your mobile and approve push login...")
+					time.sleep(5)
+				else:
+					# automatic push hasn't been configured, send push now
+					browser.find_element(By.CLASS_NAME,"auth-button").click()
+					print("Sent push login to your mobile...")
+					time.sleep(5)
+				# switch back from the DUO iframe to main frame
+				browser.switch_to.default_content()
+			time.sleep(1)
+			if i == 14:
+				# print fail message at the last second
+				print("Wrong link probably. Exiting...")
+				return
+
 	while 1:
 
 		content = browser.page_source
