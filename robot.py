@@ -27,7 +27,7 @@ def checker(link, user, pwd, recheck):
 		
 		print("Logging in...",end='\r')
 
-		time.sleep(3) # let the login go through
+		time.sleep(5) # let the login go through
 
 		if "Class Detail" in browser.title:
 			print("Logged in! Checking course status now...")
