@@ -13,7 +13,7 @@ def checker(link, user, pwd, recheck):
 	chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
-	browser = webdriver.Chrome()#options=chrome_options) # remove the argument if you wanna see the actual browser
+	browser = webdriver.Chrome(options=chrome_options) # remove the argument if you wanna see the actual browser
 	browser.get(link) # loads the link
 
 	time.sleep(5) # let the browser land on the login page if needed
