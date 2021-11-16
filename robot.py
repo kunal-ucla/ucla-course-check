@@ -12,24 +12,29 @@ def checker(link, user, pwd, recheck):
 	chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
-	browser = webdriver.Chrome(options=chrome_options) #remove the argument if you wanna see what's going on
-	browser.get(link)
+	browser = webdriver.Chrome(options=chrome_options) # remove the argument if you wanna see the actual browser
+	browser.get(link) # loads the link
 
-	time.sleep(5)
+	time.sleep(5) # let the browser land on the login page if needed
 
 	if "Sign-On" in browser.title:
+
 		username = browser.find_element("id","logon")
 		password = browser.find_element("id","pass")
 		username.send_keys(user)
 		password.send_keys(pwd)
 		browser.find_element("name","_eventId_proceed").click()
+		
 		print("Logging in...",end='\r')
-		while 1:
-			time.sleep(1)
-			if "Class Detail" in browser.title:
-				print("Logged in! Checking course status now...")
-				break
 
+		time.sleep(3) # let the login go through
+
+		if "Class Detail" in browser.title:
+			print("Logged in! Checking course status now...")
+		else:
+			print("Wrong credentials or wrong link. Check github page for directions. Exiting...")
+			return
+	
 	while 1:
 
 		content = browser.page_source
@@ -75,7 +80,7 @@ def checker(link, user, pwd, recheck):
 		print(" " * previousLength, end="\r")
 
 		browser.refresh()
-		time.sleep(3)
+		time.sleep(3) # wait for refresh
 
 	browser.close()
 
