@@ -14,5 +14,8 @@ Make sure to have the setting in your MFA to send you the push automatically bef
 Now run the script and follow the instructions. Approve the push on your mobile.
 ![Step 3](https://i.ibb.co/t38L4kf/Screenshot-2021-11-15-at-6-15-35-PM.png)
 
-It'll keep checking if any slots are open in the interval you mentioned. As soon as it finds an open slot, it'll send you a notification and the script will close.
-![Step 4](https://i.ibb.co/h9X6Hd1/Screenshot-2021-11-15-at-6-19-42-PM.png)
+It'll keep checking if any slots are open in the interval you mentioned.
+![Step 4](https://i.ibb.co/vHRhsgL/Screenshot-2021-11-15-at-7-30-30-PM.png)
+
+As soon as it finds an open slot, it'll send you a notification and the script will close.
+![Step 5](https://i.ibb.co/h9X6Hd1/Screenshot-2021-11-15-at-6-19-42-PM.png)
